@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <wand/MagickWand.h>
 
 
@@ -49,11 +50,14 @@ int main(int argc,char **argv) {
         ThrowWandException(magick_wand);
     }
     
+
+    //if (MagickReadImage(pseudo_wand, "gradient:rgba(255, 255, 255, 0.01)-white") == MagickFalse) {
     if (MagickReadImage(pseudo_wand, "gradient:rgba(255, 255, 255, 0)-white") == MagickFalse) {
         printf("Goodbye\n");
         ThrowWandException(pseudo_wand);
     }
-    
+
+
     MagickCompositeImage(magick_wand, pseudo_wand, BlendCompositeOp, 0, 0);
 
     

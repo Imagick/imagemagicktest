@@ -21,11 +21,18 @@ first.o: first.c
 	$(CC) -c -o $@ $< $(CFLAGS) $(DEFS)
 
 
-
 .PHONY: clean
 
 clean:
 	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~
 
-hellomake: first.o
+first: first.o
+	gcc -o $@ $^ $(CFLAGS) $(DEFS) $(LIBS)
+
+
+
+svgtest.o: svgtest.c
+	$(CC) -c -o $@ $< $(CFLAGS) $(DEFS)
+
+svgtest: svgtest.o
 	gcc -o $@ $^ $(CFLAGS) $(DEFS) $(LIBS)
