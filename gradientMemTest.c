@@ -14,35 +14,96 @@ void ThrowWandException(MagickWand *wand) {
 }
 
 
+void borkTheStack(int number) {
+
+    int x;
+    
+    int *borking;
+    int size = 200000;
+    
+    
+    borking = malloc(sizeof(int) * 200000);
+    
+    for (x=0 ; x<size ; x++) {
+        borking[x] = number + 0xcdcdcdcd;
+    }
+
+    //free(borking);
+}
+  
+
+
+void makeImage(int number);
+
 int main(int argc,char **argv) {
+    
+    makeImage(0);
+     
+//    int x;
+//    
+//    for(x=0 ; x<30 ; x++) {
+//        makeImage(x);
+//    }
+    
+    return (0);
+}
+    
+void makeImage(int number) {
     
     MagickBooleanType status;
     
-    MagickWand *magick_wand, *pseudo_wand;
- 
-    int columns = 500;
-    int rows = 500;
+    MagickWand *pseudo_wand;
     
+    char filename[1000];
+        
+    int columns = 127 + number;
+    int rows = 400 + number;
+
+    sprintf(filename, "gradientMemTest_%d.png", number);
+
     /*
     Read an image.
     */
     MagickWandGenesis();
    
+    borkTheStack(number);
+   
     pseudo_wand = NewMagickWand();
 
     status = MagickSetSize(pseudo_wand, columns, rows);
     if (status == MagickFalse) {
-        ThrowWandException(magick_wand);
+        ThrowWandException(pseudo_wand);
     }
 
-    printf("Step 1");
+//    printf("Step 1");
 
-    if (MagickReadImage(pseudo_wand, "gradient:rgba(255,255,255,0)-white") == MagickFalse) {
+    if (MagickReadImage(pseudo_wand, "gradient:black-rgb(128,0,255)") == MagickFalse) {
         printf("Goodbye\n");
         ThrowWandException(pseudo_wand);
     }
 
-    printf("Step 2");
+//    if (MagickReadImage(pseudo_wand, "xc:pink") == MagickFalse) {
+//        printf("Goodbye\n");
+//        ThrowWandException(pseudo_wand);
+//    }
+
+    PixelWand *tint_wand, *opacity_wand;
+
+	tint_wand = NewPixelWand();
+	PixelSetColor(tint_wand, "rgb(100,0,100)");
+
+    opacity_wand = NewPixelWand();
+    PixelSetColor(opacity_wand, "rgba(128,0,128,0.5)");
+
+    status = MagickTintImage(pseudo_wand, tint_wand, opacity_wand);
+
+    if (status == MagickFalse) {
+		printf("Failed to MagickTintImage");
+		ThrowWandException(pseudo_wand);
+	}
+
+
+    //printf("Step 2");
 
 	status = MagickSetImageFormat(pseudo_wand, "png");
 
@@ -52,16 +113,17 @@ int main(int argc,char **argv) {
 		ThrowWandException(pseudo_wand);
 	}
 
-    printf("Step 3");
+//    printf("Step 3");
 
-    status = MagickWriteImages(pseudo_wand, "gradientMemTest.png", MagickTrue);
+
+    
+
+    status = MagickWriteImages(pseudo_wand, filename, MagickTrue);
 
     if (status == MagickFalse) {
-        ThrowWandException(magick_wand);
+        ThrowWandException(pseudo_wand);
     }
         
-    magick_wand = DestroyMagickWand(magick_wand);
+    DestroyMagickWand(pseudo_wand);
     MagickWandTerminus();
-    
-    return(0);
 }

@@ -45,3 +45,10 @@ gradientMemTest.o: gradientMemTest.c
 
 gradientMemTest: gradientMemTest.o
 	gcc -o $@ $^ $(CFLAGS) $(DEFS) $(LIBS)
+
+
+identify.o: identify.c
+	$(CC) -c -o $@ $< $(CFLAGS) $(DEFS)
+
+identify: identify.o
+	gcc -o $@ $^ $(CFLAGS) $(DEFS) $(LIBS)

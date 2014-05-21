@@ -54,14 +54,13 @@ int main(int argc,char **argv) {
         printf("Goodbye\n");
         ThrowWandException(pseudo_wand);
     }
+    
+    
 
 
     MagickCompositeImage(magick_wand, pseudo_wand, BlendCompositeOp, 0, 0);
 
-    
     sprintf(filename, "%s.correct.png", argv[1]);
-    
-        
     
     status = MagickWriteImages(magick_wand, filename, MagickTrue);
     

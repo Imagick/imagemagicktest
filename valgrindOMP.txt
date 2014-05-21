@@ -1,0 +1,161 @@
+==5571== Memcheck, a memory error detector
+==5571== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==5571== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==5571== Command: ./gradientMemTest
+==5571== 
+==5571== Conditional jump or move depends on uninitialised value(s)
+==5571==    at 0x51F048A: DrawGradientImage.omp_fn.2 (quantum.h:92)
+==5571==    by 0x51F1B03: DrawGradientImage (draw.c:3330)
+==5571==    by 0x525FA05: GradientImage (paint.c:488)
+==5571==    by 0x5307017: ReadGRADIENTImage (gradient.c:159)
+==5571==    by 0x51C7AE6: ReadImage (constitute.c:547)
+==5571==    by 0x4EB1459: MagickReadImage (magick-image.c:8590)
+==5571==    by 0x400B10: main (in /home/github/imagemagicktest/gradientMemTest)
+==5571== 
+==5571== Conditional jump or move depends on uninitialised value(s)
+==5571==    at 0x51F04AF: DrawGradientImage.omp_fn.2 (quantum.h:92)
+==5571==    by 0x51F1B03: DrawGradientImage (draw.c:3330)
+==5571==    by 0x525FA05: GradientImage (paint.c:488)
+==5571==    by 0x5307017: ReadGRADIENTImage (gradient.c:159)
+==5571==    by 0x51C7AE6: ReadImage (constitute.c:547)
+==5571==    by 0x4EB1459: MagickReadImage (magick-image.c:8590)
+==5571==    by 0x400B10: main (in /home/github/imagemagicktest/gradientMemTest)
+==5571== 
+==5571== Conditional jump or move depends on uninitialised value(s)
+==5571==    at 0x51F04D4: DrawGradientImage.omp_fn.2 (quantum.h:92)
+==5571==    by 0x51F1B03: DrawGradientImage (draw.c:3330)
+==5571==    by 0x525FA05: GradientImage (paint.c:488)
+==5571==    by 0x5307017: ReadGRADIENTImage (gradient.c:159)
+==5571==    by 0x51C7AE6: ReadImage (constitute.c:547)
+==5571==    by 0x4EB1459: MagickReadImage (magick-image.c:8590)
+==5571==    by 0x400B10: main (in /home/github/imagemagicktest/gradientMemTest)
+==5571== 
+==5571== Conditional jump or move depends on uninitialised value(s)
+==5571==    at 0x51F0498: DrawGradientImage.omp_fn.2 (quantum.h:94)
+==5571==    by 0x51F1B03: DrawGradientImage (draw.c:3330)
+==5571==    by 0x525FA05: GradientImage (paint.c:488)
+==5571==    by 0x5307017: ReadGRADIENTImage (gradient.c:159)
+==5571==    by 0x51C7AE6: ReadImage (constitute.c:547)
+==5571==    by 0x4EB1459: MagickReadImage (magick-image.c:8590)
+==5571==    by 0x400B10: main (in /home/github/imagemagicktest/gradientMemTest)
+==5571== 
+==5571== Conditional jump or move depends on uninitialised value(s)
+==5571==    at 0x51F04BD: DrawGradientImage.omp_fn.2 (quantum.h:94)
+==5571==    by 0x51F1B03: DrawGradientImage (draw.c:3330)
+==5571==    by 0x525FA05: GradientImage (paint.c:488)
+==5571==    by 0x5307017: ReadGRADIENTImage (gradient.c:159)
+==5571==    by 0x51C7AE6: ReadImage (constitute.c:547)
+==5571==    by 0x4EB1459: MagickReadImage (magick-image.c:8590)
+==5571==    by 0x400B10: main (in /home/github/imagemagicktest/gradientMemTest)
+==5571== 
+==5571== Conditional jump or move depends on uninitialised value(s)
+==5571==    at 0x51F04E2: DrawGradientImage.omp_fn.2 (quantum.h:94)
+==5571==    by 0x51F1B03: DrawGradientImage (draw.c:3330)
+==5571==    by 0x525FA05: GradientImage (paint.c:488)
+==5571==    by 0x5307017: ReadGRADIENTImage (gradient.c:159)
+==5571==    by 0x51C7AE6: ReadImage (constitute.c:547)
+==5571==    by 0x4EB1459: MagickReadImage (magick-image.c:8590)
+==5571==    by 0x400B10: main (in /home/github/imagemagicktest/gradientMemTest)
+==5571== 
+==5571== Conditional jump or move depends on uninitialised value(s)
+==5571==    at 0x539F889: LosslessReduceDepthOK (png.c:1073)
+==5571==    by 0x53A2121: WriteOnePNGImage (png.c:8432)
+==5571==    by 0x53AB6F1: WritePNGImage (png.c:12311)
+==5571==    by 0x51C70BE: WriteImage (constitute.c:1181)
+==5571==    by 0x51C960F: WriteImages (constitute.c:1330)
+==5571==    by 0x4E9F48F: MagickWriteImages (magick-image.c:13117)
+==5571==    by 0x400B78: main (in /home/github/imagemagicktest/gradientMemTest)
+==5571== 
+==5571== Conditional jump or move depends on uninitialised value(s)
+==5571==    at 0x539F8B5: LosslessReduceDepthOK (png.c:1073)
+==5571==    by 0x53A2121: WriteOnePNGImage (png.c:8432)
+==5571==    by 0x53AB6F1: WritePNGImage (png.c:12311)
+==5571==    by 0x51C70BE: WriteImage (constitute.c:1181)
+==5571==    by 0x51C960F: WriteImages (constitute.c:1330)
+==5571==    by 0x4E9F48F: MagickWriteImages (magick-image.c:13117)
+==5571==    by 0x400B78: main (in /home/github/imagemagicktest/gradientMemTest)
+==5571== 
+==5571== Conditional jump or move depends on uninitialised value(s)
+==5571==    at 0x539F90E: LosslessReduceDepthOK (png.c:1073)
+==5571==    by 0x53A2121: WriteOnePNGImage (png.c:8432)
+==5571==    by 0x53AB6F1: WritePNGImage (png.c:12311)
+==5571==    by 0x51C70BE: WriteImage (constitute.c:1181)
+==5571==    by 0x51C960F: WriteImages (constitute.c:1330)
+==5571==    by 0x4E9F48F: MagickWriteImages (magick-image.c:13117)
+==5571==    by 0x400B78: main (in /home/github/imagemagicktest/gradientMemTest)
+==5571== 
+==5571== Conditional jump or move depends on uninitialised value(s)
+==5571==    at 0x539F944: LosslessReduceDepthOK (png.c:1073)
+==5571==    by 0x53A2121: WriteOnePNGImage (png.c:8432)
+==5571==    by 0x53AB6F1: WritePNGImage (png.c:12311)
+==5571==    by 0x51C70BE: WriteImage (constitute.c:1181)
+==5571==    by 0x51C960F: WriteImages (constitute.c:1330)
+==5571==    by 0x4E9F48F: MagickWriteImages (magick-image.c:13117)
+==5571==    by 0x400B78: main (in /home/github/imagemagicktest/gradientMemTest)
+==5571== 
+==5571== Conditional jump or move depends on uninitialised value(s)
+==5571==    at 0x539F8E3: LosslessReduceDepthOK (png.c:1073)
+==5571==    by 0x53A2121: WriteOnePNGImage (png.c:8432)
+==5571==    by 0x53AB6F1: WritePNGImage (png.c:12311)
+==5571==    by 0x51C70BE: WriteImage (constitute.c:1181)
+==5571==    by 0x51C960F: WriteImages (constitute.c:1330)
+==5571==    by 0x4E9F48F: MagickWriteImages (magick-image.c:13117)
+==5571==    by 0x400B78: main (in /home/github/imagemagicktest/gradientMemTest)
+==5571== 
+==5571== Conditional jump or move depends on uninitialised value(s)
+==5571==    at 0x53A2343: WriteOnePNGImage (color-private.h:41)
+==5571==    by 0x53AB6F1: WritePNGImage (png.c:12311)
+==5571==    by 0x51C70BE: WriteImage (constitute.c:1181)
+==5571==    by 0x51C960F: WriteImages (constitute.c:1330)
+==5571==    by 0x4E9F48F: MagickWriteImages (magick-image.c:13117)
+==5571==    by 0x400B78: main (in /home/github/imagemagicktest/gradientMemTest)
+==5571== 
+==5571== Conditional jump or move depends on uninitialised value(s)
+==5571==    at 0x53A2364: WriteOnePNGImage (color-private.h:41)
+==5571==    by 0x53AB6F1: WritePNGImage (png.c:12311)
+==5571==    by 0x51C70BE: WriteImage (constitute.c:1181)
+==5571==    by 0x51C960F: WriteImages (constitute.c:1330)
+==5571==    by 0x4E9F48F: MagickWriteImages (magick-image.c:13117)
+==5571==    by 0x400B78: main (in /home/github/imagemagicktest/gradientMemTest)
+==5571== 
+==5571== Conditional jump or move depends on uninitialised value(s)
+==5571==    at 0x53A2384: WriteOnePNGImage (color-private.h:41)
+==5571==    by 0x53AB6F1: WritePNGImage (png.c:12311)
+==5571==    by 0x51C70BE: WriteImage (constitute.c:1181)
+==5571==    by 0x51C960F: WriteImages (constitute.c:1330)
+==5571==    by 0x4E9F48F: MagickWriteImages (magick-image.c:13117)
+==5571==    by 0x400B78: main (in /home/github/imagemagicktest/gradientMemTest)
+==5571== 
+==5571== 
+==5571== More than 10000000 total errors detected.  I'm not reporting any more.
+==5571== Final error counts will be inaccurate.  Go fix your program!
+==5571== Rerun with --error-limit=no to disable this cutoff.  Note
+==5571== that errors may occur in your program without prior warning from
+==5571== Valgrind, because errors are no longer being displayed.
+==5571== 
+==5571== 
+==5571== Process terminating with default action of signal 11 (SIGSEGV)
+==5571==  Access not within mapped region at address 0x401988
+==5571==    at 0x4EB6E62: DestroyMagickWand (magick-wand.c:172)
+==5571==    by 0x400B99: main (in /home/github/imagemagicktest/gradientMemTest)
+==5571==  If you believe this happened as a result of a stack
+==5571==  overflow in your program's main thread (unlikely but
+==5571==  possible), you can try to increase the size of the
+==5571==  main thread stack using the --main-stacksize= flag.
+==5571==  The main thread stack size used in this run was 10485760.
+==5571== 
+==5571== HEAP SUMMARY:
+==5571==     in use at exit: 2,229,069 bytes in 2,679 blocks
+==5571==   total heap usage: 5,346 allocs, 2,668 frees, 3,037,300 bytes allocated
+==5571== 
+==5571== LEAK SUMMARY:
+==5571==    definitely lost: 0 bytes in 0 blocks
+==5571==    indirectly lost: 0 bytes in 0 blocks
+==5571==      possibly lost: 0 bytes in 0 blocks
+==5571==    still reachable: 2,229,069 bytes in 2,679 blocks
+==5571==         suppressed: 0 bytes in 0 blocks
+==5571== Rerun with --leak-check=full to see details of leaked memory
+==5571== 
+==5571== For counts of detected and suppressed errors, rerun with: -v
+==5571== Use --track-origins=yes to see where uninitialised values come from
+==5571== ERROR SUMMARY: 10000000 errors from 14 contexts (suppressed: 6 from 6)
