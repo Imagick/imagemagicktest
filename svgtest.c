@@ -1,9 +1,7 @@
 
-
-
-
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <wand/MagickWand.h>
 
 
@@ -29,17 +27,13 @@ int main(int argc,char **argv) {
 <svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" width=\"158px\" height=\"92px\" viewBox=\"0 0 158 92\" enable-background=\"new 0 0 158 92\" xml:space=\"preserve\"> \
 <text transform=\"matrix(1 0 0 1 32 58)\" font-family=\"Lobster\" font-style=\"normal\" font-size=\"20px\" font-weight=\"400\">Lobster</text> \
 </svg>";
-     
-     
-     
-    
+
     magick_wand = NewMagickWand();
     
     status = MagickReadImageBlob(magick_wand, svg, strlen(svg));
 
-
-
-    
+    //MagickSetImageFilename(magick_wand, null);
+    MagickSetLastIterator(magick_wand);
 
     status = MagickWriteImages(magick_wand, "svg.out.png", MagickTrue);
     

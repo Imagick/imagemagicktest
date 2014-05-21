@@ -17,8 +17,6 @@ ODIR=obj
 
 
 
-first.o: first.c
-	$(CC) -c -o $@ $< $(CFLAGS) $(DEFS)
 
 
 .PHONY: clean
@@ -26,7 +24,12 @@ first.o: first.c
 clean:
 	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~
 
-first: first.o
+
+blendComposite.o: blendComposite.c
+	$(CC) -c -o $@ $< $(CFLAGS) $(DEFS)
+
+
+blendComposite: blendComposite.o
 	gcc -o $@ $^ $(CFLAGS) $(DEFS) $(LIBS)
 
 
@@ -35,4 +38,10 @@ svgtest.o: svgtest.c
 	$(CC) -c -o $@ $< $(CFLAGS) $(DEFS)
 
 svgtest: svgtest.o
+	gcc -o $@ $^ $(CFLAGS) $(DEFS) $(LIBS)
+
+gradientMemTest.o: gradientMemTest.c
+	$(CC) -c -o $@ $< $(CFLAGS) $(DEFS)
+
+gradientMemTest: gradientMemTest.o
 	gcc -o $@ $^ $(CFLAGS) $(DEFS) $(LIBS)

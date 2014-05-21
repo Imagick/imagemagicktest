@@ -49,10 +49,8 @@ int main(int argc,char **argv) {
     if (status == MagickFalse) {
         ThrowWandException(magick_wand);
     }
-    
 
-    //if (MagickReadImage(pseudo_wand, "gradient:rgba(255, 255, 255, 0.01)-white") == MagickFalse) {
-    if (MagickReadImage(pseudo_wand, "gradient:rgba(255, 255, 255, 0)-white") == MagickFalse) {
+    if (MagickReadImage(pseudo_wand, "gradient:rgba(255,255,255,0)-white") == MagickFalse) {
         printf("Goodbye\n");
         ThrowWandException(pseudo_wand);
     }
