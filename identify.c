@@ -33,6 +33,10 @@ int main(int argc,char **argv) {
     
     magick_wand = NewMagickWand();
 
+
+
+  	//status = DrawSetClipPath(internd->drawing_wand, clip_mask);
+  
   
     int columns = 16;
     int rows = 16;

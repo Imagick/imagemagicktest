@@ -1,54 +1,41 @@
 
-CC=gcc
-CFLAGS=-I/usr/local/include/ImageMagick-6
 DEFS=-DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16
-DEPS = hellomake.h
 
 
-LDIR =../lib
 
-#IMAGICK_SHARED_LIBADD = -Wl,-rpath,/usr/local/lib -L/usr/local/lib -lMagickWand-6.Q16 -lMagickCore-6.Q16
 
+CC=gcc
+#CFLAGS=-I/usr/local/include/ImageMagick-6 -Wall -c $(DEFS)
+CFLAGS=-I/usr/local/include/ImageMagick-6 -Wall -c $(DEFS)
+
+
+
+
+LIBS=-lMagickWand-6.Q32HDRI -lMagickCore-6.Q32HDRI
+#LIBS=-lMagickWand-6.Q16 -lMagickCore-6.Q16
+
+#LDIR=../lib
+LIBDIR=/usr/local/lib/libMagickWand-6.Q16.so.2
 #ldconfig /usr/local/lib
 
-LIBS=-lMagickWand-6.Q16 -lMagickCore-6.Q16
-
-ODIR=obj
 
 
 
+OBJDIR=obj
 
-
-.PHONY: clean
-
-clean:
-	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~
-
-
-blendComposite.o: blendComposite.c
-	$(CC) -c -o $@ $< $(CFLAGS) $(DEFS)
-
-
-blendComposite: blendComposite.o
-	gcc -o $@ $^ $(CFLAGS) $(DEFS) $(LIBS)
+SRCS:=$(shell ls | grep "\.c")
+OBJS:=$(SRCS:%.c=obj/%.o)
+PROGS:=$(SRCS:%.c=%)
 
 
 
-svgtest.o: svgtest.c
-	$(CC) -c -o $@ $< $(CFLAGS) $(DEFS)
+$(OBJDIR)/%.o: %.c
+	$(CC) $(CFLAGS) -c $^ -o $@
 
-svgtest: svgtest.o
-	gcc -o $@ $^ $(CFLAGS) $(DEFS) $(LIBS)
+%: $(OBJDIR)/%.o
+	gcc -L$(LIBDIR) -Wl,-rpath=/usr/local/lib -o $@ $^ $(LIBS)
 
-gradientMemTest.o: gradientMemTest.c
-	$(CC) -c -o $@ $< $(CFLAGS) $(DEFS)
+#$(phony clean):
+#	rm -f $(PROGRAMS) *.o
 
-gradientMemTest: gradientMemTest.o
-	gcc -o $@ $^ $(CFLAGS) $(DEFS) $(LIBS)
-
-
-identify.o: identify.c
-	$(CC) -c -o $@ $< $(CFLAGS) $(DEFS)
-
-identify: identify.o
-	gcc -o $@ $^ $(CFLAGS) $(DEFS) $(LIBS)
+all: $(PROGS)

@@ -13,7 +13,7 @@ void ThrowWandException(MagickWand *wand) {
     exit(-1); 
 }
 
- 
+  
 //convert Biter_500.jpg -colorspace HSL -separate separate_HSL_%d.gif
 
 int main(int argc,char **argv) {
@@ -33,24 +33,38 @@ int main(int argc,char **argv) {
     hsl_wand = CloneMagickWand(magick_wand);
     
     if (hsl_wand == NULL) {
+        printf("Failed to CloneMagickWand");
         ThrowWandException(magick_wand);
     }
 
     status = MagickSeparateImageChannel(magick_wand, RedChannel);
-
-    status = MagickSetImageColorspace(hsl_wand, HSLColorspace);
-    status = MagickSeparateImageChannel(hsl_wand, RedChannel);
+    
+        status = MagickWriteImages(magick_wand, "channel1.rgb_before_%d.jpg", MagickTrue);
+        if (status == MagickFalse) {
+            ThrowWandException(magick_wand);
+        }
     
 
+    //status = MagickSetImageColorspace(hsl_wand, HSLColorspace);
+    status = MagickTransformImageColorspace(hsl_wand, HSLColorspace);
+    if (status == MagickFalse) {
+        printf("Failed to MagickSetImageColorspace");
+        ThrowWandException(magick_wand);
+    }
+    
+    
+    status = MagickSeparateImageChannel(hsl_wand, BlueChannel);
+    if (status == MagickFalse) {
+        printf("Failed to MagickSeparateImageChannel");
+        ThrowWandException(magick_wand);
+    }
 
-    status = MagickWriteImages(magick_wand, "channel1.rgb_%d.jpg", MagickTrue);
-
+    status = MagickWriteImages(magick_wand, "channel1.rgb__after_%d.jpg", MagickTrue);
     if (status == MagickFalse) {
         ThrowWandException(magick_wand);
     }
     
     status = MagickWriteImages(hsl_wand, "channel1.hsl_%d.jpg", MagickTrue);
-
     if (status == MagickFalse) {
         ThrowWandException(magick_wand);
     }

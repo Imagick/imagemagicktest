@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <malloc.h>
 #include <wand/MagickWand.h>
 
 
@@ -14,37 +15,20 @@ void ThrowWandException(MagickWand *wand) {
 }
 
 
-void borkTheStack(int number) {
-
-    int x;
-    
-    int *borking;
-    int size = 200000;
-    
-    
-    borking = malloc(sizeof(int) * 200000);
-    
-    for (x=0 ; x<size ; x++) {
-        borking[x] = number + 0xcdcdcdcd;
-    }
-
-    //free(borking);
-}
-  
-
-
 void makeImage(int number);
 
 int main(int argc,char **argv) {
-    
-    makeImage(0);
-     
-//    int x;
-//    
-//    for(x=0 ; x<30 ; x++) {
-//        makeImage(x);
-//    }
-    
+
+    int i;
+
+    //http://man7.org/linux/man-pages/man3/mallopt.3.html
+    //http://www.gnu.org/software/libc/manual/html_node/Hooks-for-Malloc.html
+
+    for (i=0; i<16 ; i++) {
+        mallopt (M_PERTURB, i);
+        makeImage(i);
+    }
+
     return (0);
 }
     
@@ -56,54 +40,22 @@ void makeImage(int number) {
     
     char filename[1000];
         
-    int columns = 127 + number;
-    int rows = 400 + number;
+    int columns = 256 + number;
+    int rows = 256 + number;
 
-    sprintf(filename, "gradientMemTest_%d.png", number);
-
-    /*
-    Read an image.
-    */
     MagickWandGenesis();
-   
-    borkTheStack(number);
-   
-    pseudo_wand = NewMagickWand();
 
+    pseudo_wand = NewMagickWand();
+ 
     status = MagickSetSize(pseudo_wand, columns, rows);
     if (status == MagickFalse) {
         ThrowWandException(pseudo_wand);
     }
 
-//    printf("Step 1");
-
-    if (MagickReadImage(pseudo_wand, "gradient:black-rgb(128,0,255)") == MagickFalse) {
-        printf("Goodbye\n");
+    if (MagickReadImage(pseudo_wand, "gradient:rgb(255,127,255)-rgb(128,0,255)") == MagickFalse) {
+        printf("Failed to generate gradient\n");
         ThrowWandException(pseudo_wand);
     }
-
-//    if (MagickReadImage(pseudo_wand, "xc:pink") == MagickFalse) {
-//        printf("Goodbye\n");
-//        ThrowWandException(pseudo_wand);
-//    }
-
-    PixelWand *tint_wand, *opacity_wand;
-
-	tint_wand = NewPixelWand();
-	PixelSetColor(tint_wand, "rgb(100,0,100)");
-
-    opacity_wand = NewPixelWand();
-    PixelSetColor(opacity_wand, "rgba(128,0,128,0.5)");
-
-    status = MagickTintImage(pseudo_wand, tint_wand, opacity_wand);
-
-    if (status == MagickFalse) {
-		printf("Failed to MagickTintImage");
-		ThrowWandException(pseudo_wand);
-	}
-
-
-    //printf("Step 2");
 
 	status = MagickSetImageFormat(pseudo_wand, "png");
 
@@ -113,10 +65,7 @@ void makeImage(int number) {
 		ThrowWandException(pseudo_wand);
 	}
 
-//    printf("Step 3");
-
-
-    
+    sprintf(filename, "./output/gradientMemTest_%x.png", number);
 
     status = MagickWriteImages(pseudo_wand, filename, MagickTrue);
 
