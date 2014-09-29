@@ -4,8 +4,10 @@
 #include <malloc.h>
 #include <wand/MagickWand.h>
 
-
-void ThrowWandException(MagickWand *wand) {
+#include <wand/pixel-wand.h>
+  
+ 
+void ThrowWandException(MagickWand *wand) { 
     char *description; 
     ExceptionType severity; 
     description = MagickGetException(wand, &severity); 
@@ -13,46 +15,51 @@ void ThrowWandException(MagickWand *wand) {
     description=(char *) MagickRelinquishMemory(description); 
     exit(-1); 
 }
-
-
+ 
+     
 void makeImage(int number);
 
-int main(int argc,char **argv) {
+  
+int main(int argc,char **argv) { 
 
-    int i;
-
-    //http://man7.org/linux/man-pages/man3/mallopt.3.html
-    //http://www.gnu.org/software/libc/manual/html_node/Hooks-for-Malloc.html
-
-    for (i=0; i<16 ; i++) {
-        mallopt (M_PERTURB, i);
+    int i;  
+   
+    // http://man7.org/linux/man-pages/man3/mallopt.3.html
+    // http://www.gnu.org/software/libc/manual/html_node/Hooks-for-Malloc.html
+   
+    for (i=0; i<16 ; i++) { 
+        mallopt (M_PERTURB, i); 
         makeImage(i);
     }
 
-    return (0);
-}
-    
+    return (0);    
+}     
+      
 void makeImage(int number) {
-    
+      
     MagickBooleanType status;
     
     MagickWand *pseudo_wand;
-    
-    char filename[1000];
+    PixelWand *pixel_wand;
+        char filename[1000];
         
-    int columns = 256 + number;
-    int rows = 256 + number;
+    int columns = 512 + number; 
+    int rows = 512 + number; 
 
-    MagickWandGenesis();
-
-    pseudo_wand = NewMagickWand();
+    MagickWandGenesis(); 
  
+    pixel_wand = NewPixelWand();  
+    PixelSetColor(pixel_wand, "blue");
+
+    pseudo_wand = NewMagickWand(); 
+    MagickSetImageBackgroundColor(pseudo_wand, pixel_wand);
+     
     status = MagickSetSize(pseudo_wand, columns, rows);
     if (status == MagickFalse) {
         ThrowWandException(pseudo_wand);
     }
 
-    if (MagickReadImage(pseudo_wand, "gradient:rgb(255,127,255)-rgb(128,0,255)") == MagickFalse) {
+    if (MagickReadImage(pseudo_wand, "gradient:rgba(255,0,0, 0.25)-rgb(255,0,0,1)") == MagickFalse) {
         printf("Failed to generate gradient\n");
         ThrowWandException(pseudo_wand);
     }

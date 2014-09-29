@@ -15,7 +15,7 @@ void ThrowWandException(MagickWand *wand) {
 
 
 int main(int argc,char **argv) {
-
+ 
     MagickWand *magick_wand;
     MagickBooleanType status;
     unsigned long range;
@@ -29,7 +29,6 @@ int main(int argc,char **argv) {
     }
 
     status = MagickTransformImageColorspace(magick_wand, GRAYColorspace);
-
 
     MagickGetQuantumRange(&range);
     
