@@ -35,7 +35,7 @@ int main(int argc,char **argv) {
 
     MagickWand *magick_wand_a;
     MagickWand *magick_wand_b;
-    MagickWand *magick_wand_c;
+    //MagickWand *magick_wand_c;
 
     MagickWandGenesis();
     
@@ -57,11 +57,11 @@ int main(int argc,char **argv) {
     }
         
         
-    magick_wand_c = NewMagickWand();
-    status = MagickReadImage(magick_wand_c, "./displaceCompositeC.png");
-    if (status == MagickFalse) {
-        ThrowWandException(magick_wand_c);
-    }
+//    magick_wand_c = NewMagickWand();
+//    status = MagickReadImage(magick_wand_c, "./displaceCompositeC.png");
+//    if (status == MagickFalse) {
+//        ThrowWandException(magick_wand_c);
+//    }
 
     // $a->setImageVirtualPixelMethod(Imagick::VIRTUALPIXELMETHOD_TRANSPARENT);
     MagickSetImageVirtualPixelMethod(magick_wand_a, TransparentVirtualPixelMethod);
@@ -76,11 +76,11 @@ int main(int argc,char **argv) {
 
     // $a->compositeImage($c, Imagick::COMPOSITE_DSTIN, 0, 0, Imagick::CHANNEL_ALPHA);
     // "COMPOSITE_DSTIN", DstInCompositeOp);
-    status = MagickCompositeImageChannel(magick_wand_a, AlphaChannel, magick_wand_c, DstInCompositeOp, 0, 0);
-    if (status == MagickFalse) {
-        printf("Failed to composite image b");
-        exit(-1); 
-    }
+//    status = MagickCompositeImageChannel(magick_wand_a, AlphaChannel, magick_wand_c, DstInCompositeOp, 0, 0);
+//    if (status == MagickFalse) {
+//        printf("Failed to composite image b");
+//        exit(-1); 
+//    }
 
     // $a->compositeImage($b, Imagick::COMPOSITE_DISPLACE, 0, 0);
     // "COMPOSITE_DISPLACE", DisplaceCompositeOp);
@@ -98,7 +98,17 @@ int main(int argc,char **argv) {
     
     printf("Finished - please compare displaceOutput.png with the result of:\n\n");
     
-    printf("convert ./displaceCompositeA.png ./displaceCompositeB.png ./displaceCompositeC.png  -virtual-pixel transparent -channel rgba -alpha on -background transparent -define compose:args=300x53.033 -compose displace -composite ./displaceFinal.png\n");
+//    printf("convert ./displaceCompositeA.png ./displaceCompositeB.png ./displaceCompositeC.png  -virtual-pixel transparent -channel rgba -alpha on -background transparent -define compose:args=300x53.033 -compose displace -composite ./displaceFinal.png\n");
+    
+//    printf("convert ./displaceCompositeA.png ./displaceCompositeB.png ./displaceCompositeC.png  -virtual-pixel transparent -channel rgba -alpha on -background transparent -define compose:args=300x53.033 -compose displace ./displaceFinal2.png\n");
+//        
+
+
+//convert displaceCompositeB.png displaceCompositeC.png +clone -combine displaceMask.png    
+    
+convert displaceCompositeA.png displaceMask.png -virtual-pixel transparent -channel rgba -alpha on -background transparent -define compose:args=300x53.033 -compose displace -composite displaceMerged.png
+    
+    
     
     
     return(0);
