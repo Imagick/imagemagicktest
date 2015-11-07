@@ -58,6 +58,9 @@ void drawClipTest(int extraClipping, int writeFile, char *filename) {
     printf("Vector %s", vector);
 
 
+
+
+
 //    MagickWand *magick_wand;
 //    
 //	magick_wand = NewMagickWand();

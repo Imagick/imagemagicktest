@@ -17,7 +17,7 @@ static void printBits(void *c, size_t n)
   printf("\n");
 }
 
-  
+   
 int main(int argc,char **argv) {
     MagickWandGenesis();
       

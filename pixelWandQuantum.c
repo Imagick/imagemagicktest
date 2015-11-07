@@ -4,7 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <malloc.h>
-#include <wand/MagickWand.h>
+// #include <wand/MagickWand.h>
+#include <MagickWand.h>
 
 
  
@@ -31,7 +32,7 @@ int main(int argc,char **argv) {
     
         blueValue = PixelGetBlue(pixel_wand);
         blueQuantum = PixelGetBlueQuantum(pixel_wand);
- 
+  
         printf("Color %s \t Blue value is %f, quantum as decimal %d, as float %g\n", color, blueValue, blueQuantum, blueQuantum);
     }
 

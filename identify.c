@@ -24,20 +24,14 @@ int main(int argc,char **argv) {
     char *filename;
         
     MagickWandGenesis();
-    
-    
+
     PixelWand *pixel_wand = NULL;
     pixel_wand = NewPixelWand();    
     PixelSetColor(pixel_wand, "white");
-    
-    
     magick_wand = NewMagickWand();
 
+    //status = DrawSetClipPath(internd->drawing_wand, clip_mask);
 
-
-  	//status = DrawSetClipPath(internd->drawing_wand, clip_mask);
-  
-  
     int columns = 16;
     int rows = 16;
     
