@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-// #define IM7 
+#define IM7 
 
 #ifdef IM7
 #include <MagickWand/MagickWand.h>
@@ -31,9 +31,13 @@ int main(int argc,char **argv) {
     
     original_wand = NewMagickWand();
     
+    //$imagick->newPseudoImage(640, 480, "magick:logo");
     MagickSetSize(original_wand, 640, 480);
     MagickReadImage(original_wand, "magick:logo");
+
+    //$imagick->adaptiveResizeImage(100, 100, true);
     MagickAdaptiveResizeImage(original_wand, 100, 75);
+    //$imagick->setImageAlphaChannel(Imagick::ALPHACHANNEL_DEACTIVATE);
     MagickSetImageAlphaChannel(original_wand, DeactivateAlphaChannel);
 
     small_sample_wand = CloneMagickWand(original_wand);
@@ -55,6 +59,15 @@ int main(int argc,char **argv) {
     );
  
     printf("Similarity is %f \n", similarity);
+     
+     
+    printf(
+        "Width: %d Height: %d x: %d, y: %d\n",
+        best_match_offset.width,
+        best_match_offset.height,
+        best_match_offset.x,
+        best_match_offset.y
+    );
 
     MagickSetImageFormat(comparison_wand, "png");
 
@@ -64,24 +77,11 @@ int main(int argc,char **argv) {
     MagickWriteImage(comparison_wand, "./IM35_6.png");
 #endif
 
-    printf(
-        "Width: %d Height: %d x: %d, y: %d\n",
-        best_match_offset.width,
-        best_match_offset.height,
-        best_match_offset.x,
-        best_match_offset.y
-    );
-
 
     //For IM7 compiled from master output is:
-    // Similarity is 0.764258 
-    // Width: 25 Height: 25 x: 0, y: 0
-    //
-    // For IM6 compiled from head of the IM6 branch 
-    // Similarity is 0.558027 
-    // Width: 25 Height: 25 x: 50, y: 50
-
-    
+    //Similarity is 390.000000
+    //For ImageMagick-6.9.2-5 output is:
+    //Similarity is 0.558027
 
     MagickWandTerminus();
     return (0);

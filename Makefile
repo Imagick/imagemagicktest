@@ -1,4 +1,8 @@
 
+#/usr/sbin/bin/MagickWand-config --version
+
+WAND_CFG=/usr/sbin/bin/MagickWand-config
+# WAND_CFG=/usr/sbin/bin/MagickWand-config
 
 
 DEFS=-DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16
@@ -6,25 +10,15 @@ DEFS=-DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16
 #LIBS=-lMagickCore-6.Q16
 
 # need to set libs to /usr/sbin/bin/MagickWand-config --libs
-#LIBS=-L/usr/sbin/lib -lMagickWand-6.Q16 -lMagickCore-6.Q16
-#LIBS=-L/usr/sbin/lib -lMagickWand-7.Q16HDRI -lMagickCore-7.Q16HDRI
-LIBS=`/usr/sbin/bin/MagickWand-config --libs`
+LIBS=`$(WAND_CFG) --libs`
 
 #centos
-#LIBDIR=/usr/lib64/libMagickCore-6.Q16.so
-#LIBDIR=/usr/sbin/lib/libMagickCore-6.Q16.so
 LIBDIR=
 
-#ubuntu
-#LIBDIR=/usr/local/lib/libMagickCore-6.Q16.so
-#LIBDIR=/usr/local/lib/
 
 .SUFFIXES:
 
-# /usr/sbin/bin/MagickWand-config --cflags
-#CFLAGS=-I/usr/local/include/ImageMagick-7  -g -O2 -Wall -c $(DEFS)
-#CFLAGS=-I/usr/include -I/usr/include/ImageMagick-6 -I/usr/local/include/ImageMagick-6 -g -O2 -Wall -c $(DEFS)
-CFLAGS=`/usr/sbin/bin/MagickWand-config --cflags`
+CFLAGS=`$(WAND_CFG) --cflags`
 
 
 
