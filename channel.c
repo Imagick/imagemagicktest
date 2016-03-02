@@ -13,9 +13,6 @@ void ThrowWandException(MagickWand *wand) {
     exit(-1); 
 }
 
-  
-//convert Biter_500.jpg -colorspace HSL -separate separate_HSL_%d.gif
-
 int main(int argc,char **argv) {
     
     MagickBooleanType status;
@@ -39,11 +36,11 @@ int main(int argc,char **argv) {
 
     status = MagickSeparateImageChannel(magick_wand, RedChannel);
     
-        status = MagickWriteImages(magick_wand, "channel1.rgb_before_%d.jpg", MagickTrue);
-        if (status == MagickFalse) {
-            ThrowWandException(magick_wand);
-        }
-    
+    status = MagickWriteImages(magick_wand, "channel1.rgb_before_%d.jpg", MagickTrue);
+    if (status == MagickFalse) {
+        ThrowWandException(magick_wand);
+    }
+
 
     //status = MagickSetImageColorspace(hsl_wand, HSLColorspace);
     status = MagickTransformImageColorspace(hsl_wand, HSLColorspace);
