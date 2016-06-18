@@ -1,6 +1,7 @@
 
 
 WAND_CFG=/usr/sbin/bin/MagickWand-config
+# WAND_CFG=/usr/bin/MagickWand-config
 
 DEFS=-DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16
 

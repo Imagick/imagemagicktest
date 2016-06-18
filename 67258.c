@@ -17,15 +17,15 @@ int main(int argc,char **argv) {
 
 	MagickScaleImage(magick_wand, 16, 16);
 
-	MagickQuantizeImage(
-		magick_wand,
-		//Changing to 255 makes the image change to grayscale
-		255,
-		GRAYColorspace,
-		0,
-		0,
-		0
-	);
+//	MagickQuantizeImage(
+//		magick_wand,
+//		//Changing to 255 makes the image change to grayscale
+//		255,
+//		GRAYColorspace,
+//		0,
+//		0,
+//		0
+//	);
 
 	status = MagickWriteImages(magick_wand, "./67258.jpg", MagickTrue);
 	MagickWandTerminus();
