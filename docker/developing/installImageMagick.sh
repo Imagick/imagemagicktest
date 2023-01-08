@@ -28,6 +28,22 @@ cd /var/app/imagemagick_src/${SRCFILE}
   --with-urw-base35-font-dir=/usr/share/fonts/type1/urw-base35 \
   --with-webp=yes
 
+./configure --with-quantum-depth=16 \
+  --with-magick-plus-plus=no \
+  --without-perl \
+  --disable-docs \
+  --with-fontconfig=yes \
+  --with-fftw \
+  --with-heic=yes \
+  --with-jpeg=yes \
+  --with-png=yes \
+  --with-tiff=yes \
+  --with-urw-base35-font-dir=/usr/share/fonts/type1/urw-base35 \
+  --with-webp=yes \
+  --without-jxl \
+  --without-zstd
+
+
 # --disable-openmp
 
 # ImageMagick appears to not fully respect lib paths even when
